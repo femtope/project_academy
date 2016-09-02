@@ -1,0 +1,133 @@
+#map {
+    height: 860px;
+}
+
+.skin-red-light .wrapper,
+.skin-red-light .main-sidebar,
+.skin-red-light .left-side {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.main-sidebar,
+.left-side {
+    width: 350px;
+}
+
+.sidebar-collapse .main-sidebar,
+.sidebar-collapse .left-side {
+    width: 0;
+}
+
+.white {
+    color: aliceblue;
+}
+
+.black {
+    color: black;
+}
+
+.red {
+    color: red;
+}
+.bg-aqua,
+.callout.callout-info,
+.alert-info,
+.label-info,
+.modal-info .modal-body {
+    background-color: rgba(0, 0, 0, 1) !important;
+}
+
+.alert-info {
+    border-color: rgba(0, 0, 0, 1);
+}
+
+.labelLga-icon {
+    color: darkmagenta;
+    font-weight:bold;
+    font-size: 12px;
+    text-shadow: '#ffffff';
+}
+
+.labelWard-icon {
+    color: '#41006D';
+    text-shadow: '#ffffff';
+    font-size: bold 10px;
+}
+
+.pad{
+    padding-left: 5px;
+    height: 1.1em;
+}
+.pad1{
+    padding-top: 2px;
+    height: 4em;
+}
+.pad2 {
+    padding-bottom: 5px;
+    height: 2em;
+}
+.pad3 {
+    padding-bottom: 25px;
+    height: 2em;
+}
+
+.special-size{
+    font: bold 26px "Agency FB";
+}
+
+.special-size1{
+    font: bold 22px "Agency FB";
+}
+.special-size2{
+    font: bold 20px "Agency FB";
+    color: chocolate;
+
+}
+
+/*
+.btnAd{
+    padding-left: 60px;
+    color: chocolate;
+}
+*/
+
+
+.info-box {
+    overflow: auto;
+    overflow-y: scroll;
+    font-size: 13px;
+    text-align: justify;
+
+}
+.logo_pad{
+    padding-top: 1px;
+    padding-right: 2px;
+}
+
+.title{
+    font: bold 20px "Bungee Shade";
+    font-family: 'Bungee Shade';
+    color: white;
+    text-align: center;
+    font-family: 'Baloo Bhaina', cursive;
+
+}
+
+#spinposition {
+    position: absolute;
+    top: 300px;
+    right: 700px;
+    width: 100px;
+    height: 100px;
+    background: transparent;
+}
+
+#detailPosition{
+    position: absolute;
+    top: 110px;
+    right: 5px;
+    width: 250px;
+    height: 100px;
+    background: transparent;
+}
+
