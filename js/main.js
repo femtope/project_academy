@@ -1,11 +1,11 @@
-var type = '',
+var type = '', distance,
     region = '',
     prefecture = '',
     sub_prefecture = '',
     geoData = null,
     dataLayer = null,
     markerGroup = null,
-    guineaAdminLayer1, guineaAdminLayer2,
+    guineaAdminLayer0, guineaAdminLayer1, guineaAdminLayer2,
     region_layer = null, prefecture_layer = null, sub_prefecture_layer = null,
     GINLabels = [],
     GINAdmin2 = false,
@@ -17,9 +17,8 @@ var type = '',
 
 
 var map = L.map('map', {
-    center: [10.6, -14],
+    center: [9.9, -12],
     zoom: 7,
-    setView: [10.6, -13.8],
     animation: true,
     zoomControl: false,
     layers: [osm]
@@ -35,16 +34,18 @@ var baseMaps = {
     "OSM": osm
 };
 
-L.control.layers(baseMaps).addTo(map);
+
 
 map.on('zoomend', function () {
     adjustLayerbyZoom(map.getZoom())
 })
 
-//
-//L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//    maxZoom: 18
-//}).addTo(map);
+
+new L.Control.Zoom({
+    position: 'topright'
+}).addTo(map);
+
+L.control.layers(baseMaps).addTo(map);
 
 new L.Control.Zoom({
     position: 'topright'
@@ -92,8 +93,8 @@ function triggerUiUpdate() {
     console.log("Region:  ", region)
     prefecture = $('#prefecture_scope').val()
     console.log("Prefecture:  ", prefecture)
-    sub_prefecture = $('#sub_prefecture_scope').val()
-    console.log("Sub-Prefecture:  ", sub_prefecture)
+//    sub_prefecture = $('#sub_prefecture_scope').val()
+//    console.log("Sub-Prefecture:  ", sub_prefecture)
     var query = buildQuery(type, region, prefecture, sub_prefecture)
     console.log("QUERY:  ", query)
     getData(query)
@@ -204,7 +205,7 @@ function addAdminLayersToMap(layers) {
                 "color": '#412406',
                 "fillColor": '#FFFFFF',
                 "weight": 1.5,
-                "opacity": 0.7,
+                "opacity": 0.5,
                 "fillOpacity": 0.1
             },
             'region': {
@@ -236,26 +237,26 @@ function addAdminLayersToMap(layers) {
     regionSelect = $('#region_scope').val()
     console.log('Region Selected: ', regionSelect)
     prefectureSelect = $('#prefecture_scope').val()
-    console.log('Region Selected: ', regionSelect)
+    console.log('Pefecture Selected: ', prefectureSelect)
 
 
-    guineaAdminLayer1 = L.geoJson(layers['guineaAdmin0'], {
+    guineaAdminLayer0 = L.geoJson(layers['guineaAdmin0'], {
         style: layerStyles['admin0']
     }).addTo(map)
 
-//    guineaAdminLayer2 = L.geoJson(layers['guineaAdmin2'], {
-//        style: layerStyles['admin2'],
-//        onEachFeature: function (feature, layer) {
-//            var labelIcon = L.divIcon({
-//                className: 'labelLga-icon',
-//                html: feature.properties.NAME_2
-//            })
-//            GINLabels.push(L.marker(layer.getBounds().getCenter(), {
-//                    icon: labelIcon
-//                }))
-//
-//        }
-//    })
+    guineaAdminLayer2 = L.geoJson(layers['guineaAdmin2'], {
+        style: layerStyles['admin0'],
+        onEachFeature: function (feature, layer) {
+            var labelIcon = L.divIcon({
+                className: 'labelLga-icon',
+                html: feature.properties.NAME_2
+            })
+            GINLabels.push(L.marker(layer.getBounds().getCenter(), {
+                    icon: labelIcon
+                }))
+
+        }
+    })
 
     //Zoom In to region level on selection
     if(region_layer != null)
@@ -266,7 +267,7 @@ function addAdminLayersToMap(layers) {
           return feature.properties.NAME_1 === regionSelect
           console.log('name 1: ', feature.properties.NAME_1)
       },
-      style: layerStyles['region'],
+      style: layerStyles['admin0'],
       }).addTo(map)
     map.fitBounds(region_layer.getBounds())
 
@@ -277,12 +278,12 @@ function addAdminLayersToMap(layers) {
 
       prefecture_layer = L.geoJson(layers['guineaAdmin2'], {
         filter: function(feature) {
-          return feature.properties.NAME_1 === regionSelect
-          console.log('name 2: ', feature.properties.NAME_1)
+          return feature.properties.NAME_2 === prefectureSelect
+          console.log('name 2: ', feature.properties.NAME_2)
       },
-      style: layerStyles['region'],
+      style: layerStyles['admin0'],
       }).addTo(map)
-    map.fitBounds(region_layer.getBounds())
+    map.fitBounds(prefecture_layer.getBounds())
 
 
 }
@@ -367,6 +368,45 @@ function getAdminLayers() {
 function logError(error) {
     console.log("error!")
 }
+
+function geoLocate(){
+
+}
+
+
+//Making Sure Multiple CheckBox are not selected at a time
+$("input:checkbox").on('click', function() {
+  // in the handler, 'this' refers to the box clicked on
+  var $box = $(this);
+  if ($box.is(":checked")) {
+    // the name of the box is retrieved using the .attr() method
+    // as it is assumed and expected to be immutable
+      distance = $box.attr("value");
+      console.log('CheckBoxes:  ', distance)
+    var group = "input:checkbox[name='" + $box.attr("name") + "']";
+    // the checked state of the group/box on the other hand will change
+    // and the current value is retrieved using .prop() method
+    $(group).prop("checked", false);
+    $box.prop("checked", true);
+  } else {
+    $box.prop("checked", false);
+  }
+});
+
+//Filtering Prefecture Based on Selected Region
+$(document).ready(function () {
+    var allOptions = $('#prefecture_scope option')
+    $('#region_scope').change(function () {
+        $('#prefecture_scope option').remove()
+        var classN = $('#region_scope option:selected').prop('class');
+        var opts = allOptions.filter('.' + classN);
+        $.each(opts, function (i, j) {
+            $(j).appendTo('#prefecture_scope');
+        });
+    });
+});
+
+
 
 getAdminLayers()
 hideLoader()

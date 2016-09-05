@@ -118,7 +118,7 @@ body {
 }
 .fixed .content-wrapper,
 .fixed .right-side {
-  padding-top: 50px;
+  padding-top: 60px;
 }
 @media (max-width: 767px) {
   .fixed .content-wrapper,
@@ -420,7 +420,7 @@ a:focus {
   left: 0;
   padding-top: 50px;
   min-height: 100%;
-  width: 150px;
+  width: 80px;
   z-index: 810;
   -webkit-transition: -webkit-transform 0.3s ease-in-out, width 0.3s ease-in-out;
   -moz-transition: -moz-transform 0.3s ease-in-out, width 0.3s ease-in-out;

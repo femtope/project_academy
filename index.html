@@ -29,53 +29,31 @@
 </head>
 
 
-<body class="hold-transition skin-blue layout-top-nav">
-    <div class="wrapper">
-
-        <!-- Main Header -->
-        <header class="main-header">
-
-          <!-- Header Navbar -->
-            <nav class="navbar navbar-static-top" role="navigation">
-
-            <!-- Sidebar Toggle Button -->
-            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                  <span class="sr-only">Toggle navigation </span>
-
-            </a>
-
-            <div class="title">
+<body  class="hold-transition skin-blue layout-top-nav">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <img src="image/logo2.png" height="70" width="300">
+        </div>
+          <div class="title">
                 <h1>Guinea Health Facility Locator</h1>
-            </div>
+        </div>
+      </div>
+    </nav>
 
-<!--
-            <div class="navbar-custom-menu">
-              <div class="alert alert-info sideColor">
-                   <div class="text-left logo_pad">
-                     <img src="image/guinea_logo.png" height="35" width="140">
-                  </div>
-
-                </div>
-              </div>
--->
-
-            </nav>
-        </header>
-
-        <!-- Left side column. contains the logo and sidebar -->
+    <!-- Left side column. contains the logo and sidebar -->
+    <div class="wrapper">
         <aside class="main-sidebar main-sidebar-light sidebar_edit">
-
-          <section class="pad1">
-
-          </section>
-
-
-          <section class="sidebar">
-
-
+            <section class="sidebar">
              <div class="alert alert-info sideColor">
-                <h4><i class="fa fa-h-square fa-2x"></i>  Health Facility Type </h4>
-                      <div class="form-group">
+                <h4><i class="icon fa fa-h-square fa-2x"></i>Health Facility Type </h4>
+                      <div class="form-group-sm">
                         <select id="hf_type" onchange="triggerUiUpdate(); getAdminLayers()" class="form-control">
                             <option value="">All</option>
                             <option value="Autres">Autres</option>
@@ -100,93 +78,104 @@
 
 
                  <!--Region DropDown-->
+                 <br>
                  <h4><i class="icon fa fa-globe fa-2x"></i>Region</h4>
-                      <div class="form-group">
-                        <select id="region_scope" onchange="getAdminLayers(); triggerUiUpdate()" class="form-control">
+                      <div class="form-group-sm">
+                        <select id="region_scope" onchange="getAdminLayers(); triggerUiUpdate();" class="form-control">
                             <option value="">All</option>
-                            <option value="Boke">Boke</option>
-                            <option value="Conakry">Conakry</option>
-                            <option value="Faranah">Faranah</option>
-                            <option value="Kankan">Kankan</option>
-                            <option value="Kindia">Kindia</option>
-                            <option value="Labe">Labe</option>
-                            <option value="Mamou">Mamou</option>
-                            <option value="Nzerekore">Nzerekore</option>
+                            <option value="Boke" id="region1" class="boke">Boke</option>
+                            <option value="Conakry" id="region2" class="conakry">Conakry</option>
+                            <option value="Faranah" id="region3" class="faranah">Faranah</option>
+                            <option value="Kankan" id="region4" class="kankan">Kankan</option>
+                            <option value="Kindia" id="region5" class="kindia">Kindia</option>
+                            <option value="Labe" id="region6" class="labe">Labe</option>
+                            <option value="Mamou" id="region7" class="mamou">Mamou</option>
+                            <option value="Nzerekore" id="region8" class="nzerekore">Nzerekore</option>
                         </select>
                     </div>
 
                  <!--Prefecture DropDown-->
+                 <br>
                  <h4><i class="icon fa fa-globe fa-2x"></i>Prefecture</h4>
-                      <div class="form-group">
-                        <select id="prefecture_scope" onchange="triggerUiUpdate()" class="form-control">
+                      <div class="form-group-sm">
+                        <select id="prefecture_scope" onchange="triggerUiUpdate();" class="form-control">
                             <option value="">All</option>
-                            <option value="Boke">Boke</option>
-                            <option value="Conakry">Conakry</option>
-                            <option value="Faranah">Faranah</option>
-                            <option value="Kankan">Kankan</option>
-                            <option value="Kindia">Kindia</option>
-                            <option value="Labe">Labe</option>
-                            <option value="Mamou">Mamou</option>
-                            <option value="Nzerekore">Nzerekore</option>
+                            <option value="Boffa" class="selectors boke">Boffa</option>
+                            <option value="Boke" class="selectors boke">Boke</option>
+                            <option value="Fria" class="selectors boke">Fria</option>
+                            <option value="Gaoual" class="selectors boke">Gaoual</option>
+                            <option value="Koundara" class="selectors boke">Koundara</option>
+                            <option value="" class="selectors boke"></option>
+                            <option value="Conarky" class="selectors conakry">Conarky</option>
+                            <option value="" class="selectors conakry"></option>
+                            <option value="Dabola" class="selectors faranah">Dabola</option>
+                            <option value="Dinguiraye" class="selectors faranah">Dinguiraye</option>
+                            <option value="Faranah" class="selectors faranah">Faranah</option>
+                            <option value="Kissidougou" class="selectors faranah">Kissidougou</option>
+                            <option value="" class="selectors faranah"></option>
+                            <option value="Kankan" class="selectors kankan">Kankan</option>
+                            <option value="Kerouana" class="selectors kankan">Kerouana</option>
+                            <option value="Kouroussa" class="selectors kankan">Kouroussa</option>
+                            <option value="Mandiana" class="selectors kankan">Mandiana</option>
+                            <option value="Siguiri" class="selectors kankan">Siguiri</option>
+                            <option value="" class="selectors kankan"></option>
+                            <option value="Coyah" class="selectors kindia">Coyah</option>
+                            <option value="Dubreka" class="selectors kindia">Dubreka</option>
+                            <option value="Forecariah" class="selectors kindia">Forecariah</option>
+                            <option value="Kindia" class="selectors kindia">Kindia</option>
+                            <option value="Telemele" class="selectors kindia">Telemele</option>
+                            <option value="" class="selectors kindia"></option>
+                            <option value="Koubia" class="selectors labe">Koubia</option>
+                            <option value="Labe" class="selectors labe">Labe</option>
+                            <option value="Lelouma" class="selectors labe">Lelouma</option>
+                            <option value="Mali" class="selectors labe">Mali</option>
+                            <option value="Tougue" class="selectors labe">Tougue</option>
+                            <option value="" class="selectors labe"></option>
+                            <option value="Dalaba" class="selectors mamou">Dalaba</option>
+                            <option value="Mamou" class="selectors mamou">Mamou</option>
+                            <option value="Pita" class="selectors mamou">Pita</option>
+                            <option value="" class="selectors mamou"></option>
+                            <option value="Beyla" class="selectors nzerekore">Beyla</option>
+                            <option value="Gueckedou" class="selectors nzerekore">Gueckedou</option>
+                            <option value="Lola" class="selectors nzerekore">Lola</option>
+                            <option value="Macenta" class="selectors nzerekore">Macenta</option>
+                            <option value="Nzerekore" class="selectors nzerekore">Nzerekore</option>
+                            <option value="Yamou" class="selectors nzerekore">Yamou</option>
+                            <option value="" class="selectors nzerekore"></option>
                         </select>
                     </div>
 
-                 <!--Sub-Prefecture DropDown-->
-                 <h4><i class="icon fa fa-globe fa-2x"></i>Sub-Prefecture</h4>
-                      <div class="form-group">
-                        <select id="sub_prefecture_scope" onchange="triggerUiUpdate()" class="form-control">
-                            <option value="">All</option>
-                            <option value="Boke">Boke</option>
-                            <option value="Conakry">Conakry</option>
-                            <option value="Faranah">Faranah</option>
-                            <option value="Kankan">Kankan</option>
-                            <option value="Kindia">Kindia</option>
-                            <option value="Labe">Labe</option>
-                            <option value="Mamou">Mamou</option>
-                            <option value="Nzerekore">Nzerekore</option>
-                        </select>
+                 <!--Distance-->
+                <br>
+                 <h4><i class="icon fa fa-car fa-2x"></i>Drive Distance</h4>
+                      <div class="form-group special-size">
+                         <form class="checkbox" onclick="geoLocate()" action="">
+                            <input type="checkbox" name="drive" value="2">2 Km<br>
+                            <input type="checkbox" name="drive" value="3">3 Km<br>
+                            <input type="checkbox" name="drive" value="4">4 Km<br>
+                          </form>
                     </div>
-
+                 <br>
+                 <div class="text-center">
+                    <span class="info-box-text white">Currently Displaying:</span>
+                    <span class="info-box-number white"><b id="country2"></b><big id="projectCount">0</big> Health Facility(ies)  </span>
+                </div>
             </div>
           </section>
-
-            <section class="sidebar">
-              <!--<div class="row"></div>-->
-
-              <div class="text-center">
-                    <span class="info-box-text white">Currently Displaying:</span>
-
-                    <span class="info-box-number white"><b id="country2"></b><big id="projectCount">0</big> Health Facily(ies)  </span>
-
-                </div>
-
-
-            </section>
 
         </aside>
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!--<section class="content-header">hello!</section>-->
             <!-- Main content -->
-            <section class="content col-md-12">
+            <section>
 
                 <div class="col-md-12" id="map">
 
                 </div>
-                <!-- Your Page Content Here -->
-
                 <div>
-                  <h7 class="black text-center"><i class="icon fa fa-spinner fa-5x" id="spinposition"></i></h7>
+                  <h7 class="red text-center"><i class="icon fa fa-spinner fa-5x" id="spinposition"></i></h7>
                 </div>
-
-<!--
-            <div id="title_location">
-              <div class="alert alert-info sideColor">
-
-                </div>
-            </div>
--->
-
 
             <div id="detailPosition">
               <div class="alert sideColor">
@@ -196,19 +185,14 @@
                             <div class="box-tools pull-right">
                                 <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                             </div>
-
                         </div>
-
                         <div id="infoContent" class="box-body black info-box">
                             <p>Click on any of the points to see <br>full information here... </p>
                         </div>
-
                     </div>
-
                 </div>
                 </div>
             </section>
-            <!-- /.content -->
         </div>
 
         <footer class="main-footer">

@@ -1,5 +1,5 @@
 #map {
-    height: 860px;
+    height: 700px;
 }
 
 .skin-red-light .wrapper,
@@ -7,6 +7,8 @@
 .skin-red-light .left-side {
     background-color: rgba(0, 0, 0, 1);
 }
+
+
 
 .main-sidebar,
 .left-side {
@@ -71,9 +73,11 @@
     height: 2em;
 }
 
+/*
 .special-size{
-    font: bold 26px "Agency FB";
+    font: bold 22px "Agency FB";
 }
+*/
 
 .special-size1{
     font: bold 22px "Agency FB";
@@ -106,10 +110,10 @@
 
 .title{
     font: bold 20px "Bungee Shade";
-    font-family: 'Bungee Shade';
+/*    font-family: 'Bungee Shade';*/
     color: white;
     text-align: center;
-    font-family: 'Baloo Bhaina', cursive;
+/*    font-family: 'Baloo Bhaina', cursive;*/
 
 }
 
@@ -124,10 +128,25 @@
 
 #detailPosition{
     position: absolute;
-    top: 110px;
+    top: 160px;
     right: 5px;
     width: 250px;
     height: 100px;
     background: transparent;
 }
 
+input.checkbox  {
+	width : 20px;
+	height : 20px;
+	padding: 0px;
+	margin: 0px;
+	}
+
+.special-size{
+    font: 22px "Agency FB";
+/*    font: 20px "Baloo Bhaina";*/
+/*    color: white;*/
+    text-align: justify;
+    padding-left: 20px;
+
+}
