@@ -1,7 +1,8 @@
 var type = '', distance,
     region = '',
-    prefecture = '',
-    sub_prefecture = '',
+    prefecture = '', prefecture_select = '',
+    sub_prefecture = '', current_lat = '', current_long = '', current_accuracy = '',
+    positionOpt = {},
     geoData = null,
     dataLayer = null,
     markerGroup = null,
@@ -17,7 +18,7 @@ var type = '', distance,
 
 
 var map = L.map('map', {
-    center: [9.9, -12],
+    center: [10.1, -12.6],
     zoom: 7,
     animation: true,
     zoomControl: false,
@@ -25,6 +26,7 @@ var map = L.map('map', {
     //minZoom: 6
 
 });
+
 
 var baseMaps = {
     "Google Satelite": googleSat,
@@ -99,6 +101,8 @@ function triggerUiUpdate() {
     console.log("QUERY:  ", query)
     getData(query)
    // map.setZoom(6)
+    prefecture_select = $('#region_scope').val()
+    console.log('The Region Arena:  ', prefecture_select)
 }
 
 
@@ -369,10 +373,65 @@ function logError(error) {
     console.log("error!")
 }
 
-function geoLocate(){
 
+function geoLocate(){
+var options = {
+  enableHighAccuracy: true,
+  timeout: Infinity,
+  maximumAge: 0
+};
+
+function success(pos) {
+  var crd = pos.coords;
+    current_lat = crd.latitude;
+    current_long = crd.longitude;
+    current_accuracy = crd.accuracy;
+
+    console.log('Lat:  ', current_lat);
+    console.log('Long:  ', current_long);
+
+    var fc = {
+"type": "FeatureCollection",
+"features": [
+{ "type": "Feature", "properties": { "id": 5 }, "geometry": { "type": "Point", "coordinates": [current_long, current_lat] } }
+]
+}
+        var jsonLayer = L.geoJson(fc).addTo(map);
+        var coord = fc.features[0].geometry.coordinates;
+        lalo = L.GeoJSON.coordsToLatLng(coord);
+        map.setView(lalo, 14);
+
+    var drive = distance * 1;
+    console.log('Drive dist:: ', drive);
+    console.log('the fc:  ', fc)
+
+    var buffered = turf.buffer(fc, drive, 'kilometers');
+    var bufferLayer = L.geoJson(buffered).addTo(map);
+};
+
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+
+     navigator.geolocation.getCurrentPosition(success, error, options);
 }
 
+
+function createBuffer() {
+//    var drive = distance * 1;
+//
+//    var pts = {
+//        "type": "FeatureCollection",
+//        "features": [
+//            { "type": "Feature", "properties": { "id": 5 }, "geometry": { "type": "Point", "coordinates": [current_long, current_lat] } }
+//            ]
+//        }
+//    console.log('Drive dist:: ', drive);
+//    console.log('the fc:  ', pts)
+//
+//    var buffered = turf.buffer(pts, drive, 'kilometers');
+//    var bufferLayer = L.geoJson(buffered).addTo(map);
+}
 
 //Making Sure Multiple CheckBox are not selected at a time
 $("input:checkbox").on('click', function() {
@@ -382,7 +441,6 @@ $("input:checkbox").on('click', function() {
     // the name of the box is retrieved using the .attr() method
     // as it is assumed and expected to be immutable
       distance = $box.attr("value");
-      console.log('CheckBoxes:  ', distance)
     var group = "input:checkbox[name='" + $box.attr("name") + "']";
     // the checked state of the group/box on the other hand will change
     // and the current value is retrieved using .prop() method
@@ -405,6 +463,22 @@ $(document).ready(function () {
         });
     });
 });
+
+
+function showPrefecture() {
+    prefecture_show = document.getElementById("prefecture_id");
+    prefecture_show1 = document.getElementById("prefecture_id1");
+    if(prefecture_select != "") {
+         prefecture_show.style.visibility = "visible"
+         prefecture_show1.style.visibility = "visible"
+    }
+
+    else{
+        prefecture_show.style.visibility = "hidden"
+         prefecture_show1.style.visibility = "hidden"
+    }
+
+}
 
 
 

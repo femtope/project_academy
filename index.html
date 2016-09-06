@@ -16,16 +16,17 @@
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="css/AdminLTE.css">
-<!--    <link rel="stylesheet" href="css/skins/_all-skins.min.css">-->
     <link rel="stylesheet" href="css/skins/skin-blue.css">
     <link rel="stylesheet" href="plugins/leaflet/leaflet.css">
     <link rel="stylesheet" href="css/main.css">
+    <link href="bower_components/bootstrap-social/bootstrap-social.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-social/bootstrap-social.less" rel="stylesheet">
      <!-- Marker Cluster -->
     <link rel="stylesheet" href="plugins/MarkerCluster/MarkerCluster.css">
     <link rel="stylesheet" href="plugins/MarkerCluster/MarkerCluster.Default.css">
      <!-- JQuery Slider -->
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/iThing.css">
+    <link rel="stylesheet" href="css/icon.css">
+
 </head>
 
 
@@ -81,7 +82,7 @@
                  <br>
                  <h4><i class="icon fa fa-globe fa-2x"></i>Region</h4>
                       <div class="form-group-sm">
-                        <select id="region_scope" onchange="getAdminLayers(); triggerUiUpdate();" class="form-control">
+                        <select id="region_scope" onchange="getAdminLayers(); triggerUiUpdate(); showPrefecture();" class="form-control">
                             <option value="">All</option>
                             <option value="Boke" id="region1" class="boke">Boke</option>
                             <option value="Conakry" id="region2" class="conakry">Conakry</option>
@@ -96,25 +97,25 @@
 
                  <!--Prefecture DropDown-->
                  <br>
-                 <h4><i class="icon fa fa-globe fa-2x"></i>Prefecture</h4>
-                      <div class="form-group-sm">
-                        <select id="prefecture_scope" onchange="triggerUiUpdate();" class="form-control">
+                 <h4 id="prefecture_id" readonly style="visibility:hidden"><i class="icon fa fa-globe fa-2x"></i>Prefecture</h4>
+                      <div id="prefecture_id1" class="form-group-sm" readonly style="visibility:hidden">
+                        <select id="prefecture_scope" onchange="getAdminLayers(); triggerUiUpdate();" class="form-control">
                             <option value="">All</option>
                             <option value="Boffa" class="selectors boke">Boffa</option>
                             <option value="Boke" class="selectors boke">Boke</option>
                             <option value="Fria" class="selectors boke">Fria</option>
                             <option value="Gaoual" class="selectors boke">Gaoual</option>
                             <option value="Koundara" class="selectors boke">Koundara</option>
-                            <option value="" class="selectors boke"></option>
-                            <option value="Conarky" class="selectors conakry">Conarky</option>
-                            <option value="" class="selectors conakry"></option>
+                            <option value="" class="selectors boke">All</option>
+                            <option value="Conakry" class="selectors conakry">Conakry</option>
+                            <option value="" class="selectors conakry">All</option>
                             <option value="Dabola" class="selectors faranah">Dabola</option>
                             <option value="Dinguiraye" class="selectors faranah">Dinguiraye</option>
                             <option value="Faranah" class="selectors faranah">Faranah</option>
                             <option value="Kissidougou" class="selectors faranah">Kissidougou</option>
                             <option value="" class="selectors faranah"></option>
                             <option value="Kankan" class="selectors kankan">Kankan</option>
-                            <option value="Kerouana" class="selectors kankan">Kerouana</option>
+                            <option value="Kerouana" class="selectors kankan">Kerouane</option>
                             <option value="Kouroussa" class="selectors kankan">Kouroussa</option>
                             <option value="Mandiana" class="selectors kankan">Mandiana</option>
                             <option value="Siguiri" class="selectors kankan">Siguiri</option>
@@ -149,7 +150,7 @@
                 <br>
                  <h4><i class="icon fa fa-car fa-2x"></i>Drive Distance</h4>
                       <div class="form-group special-size">
-                         <form class="checkbox" onclick="geoLocate()" action="">
+                         <form class="checkbox" onclick="geoLocate(); createBuffer();">
                             <input type="checkbox" name="drive" value="2">2 Km<br>
                             <input type="checkbox" name="drive" value="3">3 Km<br>
                             <input type="checkbox" name="drive" value="4">4 Km<br>
@@ -192,23 +193,39 @@
                     </div>
                 </div>
                 </div>
+
+                    <div class="col-md-12  border">
+            <ul class="social-network social-circle">
+<!--                <p class="pull-left">&copy; 2016 &middot; <a href="#">Oluwafemi Ooju</a> and&middot; <a href="#">Jalla Osman</a> eHA Academy Projects</p>-->
+                <li><a target="_blank" href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/BrianAlex1251" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" href="http://www.twitter.com/femtope" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" href="https://plus.google.com/u/0/115849015961200482106" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/in/oluwafemi-ooju-0061b627" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
             </section>
         </div>
 
-        <footer class="main-footer">
-            <!-- To the right -->
-               <div class="pull-right">
-              <span><strong>Copyright &copy; 2016 <a target="_blank" href="">Group Four, eHA Academy</a>.</strong> All rights reserved.</span>
-            </div>
-        </footer>
+        <footer>
+<!--
+        <div class="col-md-12  border">
+            <ul class="social-network social-circle">
+                <p class="pull-right">&copy; 2016 &middot; <a href="#">Oluwafemi Ooju</a> and&middot; <a href="#">Jalla Osman</a> eHA Academy Projects</p>
+                <li><a target="_blank" href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/BrianAlex1251" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                <li><a target="_blank" href="http://www.twitter.com/femtope" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                <li><a target="_blank" href="https://plus.google.com/u/0/115849015961200482106" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                <li><a target="_blank" href="https://www.linkedin.com/in/oluwafemi-ooju-0061b627" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+-->
+
+      </footer>
         <!-- jQuery 2.1.4 -->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
         <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
-        <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-        <script src="http://d3js.org/topojson.v1.min.js"></script>
-        <script src='https://api.mapbox.com/mapbox.js/v2.3.0/mapbox.js'></script>
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
-        <script src="plugins/slimScroll/jquery.slimscroll.js"></script>
         <!-- Bootstrap 3.3.5 -->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <!-- AdminLTE App -->
@@ -216,6 +233,8 @@
         <script src="plugins/leaflet/leaflet.js"></script>
         <script src="js/main.js"></script>
         <script src="plugins/MarkerCluster/leaflet.markercluster-src.js"></script>
+        <script src="node_modules/turf/turf.js"></script>
+        <script>window.jQuery || document.write('<script src="jquery/dist/jquery.min.js"><\/script>')</script>
     </div>
 </body>
 
