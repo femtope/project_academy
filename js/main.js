@@ -1,4 +1,5 @@
 var type = '', distance,
+    twokm, threekm, fourkm,
     region = '',
     prefecture = '', prefecture_select = '',
     sub_prefecture = '', current_lat = '', current_long = '', current_accuracy = '',
@@ -7,7 +8,7 @@ var type = '', distance,
     dataLayer = null,
     markerGroup = null,
     guineaAdminLayer0, guineaAdminLayer1, guineaAdminLayer2,
-    region_layer = null, prefecture_layer = null, sub_prefecture_layer = null,
+    region_layer = null, prefecture_layer = null, sub_prefecture_layer = null, bufferLayer = null,
     GINLabels = [],
     GINAdmin2 = false,
     googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']}),
@@ -55,7 +56,7 @@ new L.Control.Zoom({
 
 L.control.scale({
     position: 'bottomright',
-    maxWidth: 150,
+    maxWidth: 100,
     metric: true,
     updateWhenIdle: true
 }).addTo(map);
@@ -90,19 +91,11 @@ function adjustLayerbyZoom(zoomGIN) {
 
 function triggerUiUpdate() {
     type = $('#hf_type').val()
-    console.log("HF Type:  ", type)
     region = $('#region_scope').val()
-    console.log("Region:  ", region)
     prefecture = $('#prefecture_scope').val()
-    console.log("Prefecture:  ", prefecture)
-//    sub_prefecture = $('#sub_prefecture_scope').val()
-//    console.log("Sub-Prefecture:  ", sub_prefecture)
     var query = buildQuery(type, region, prefecture, sub_prefecture)
-    console.log("QUERY:  ", query)
     getData(query)
-   // map.setZoom(6)
     prefecture_select = $('#region_scope').val()
-    console.log('The Region Arena:  ', prefecture_select)
 }
 
 
@@ -171,8 +164,7 @@ function addDataToMap(geoData) {
             zoomToBoundsOnClick: true,
             removeOutsideVisibleBounds: true
         })
-        //console.log("geoData", geoData)
-    dataLayer = L.geoJson(geoData, {
+        dataLayer = L.geoJson(geoData, {
         pointToLayer: function (feature, latlng) {
             var marker = L.marker(latlng, {icon: markerHealth})
                 //markerGroup.addLayer(marker);
@@ -239,17 +231,13 @@ function addAdminLayersToMap(layers) {
       }
 
     regionSelect = $('#region_scope').val()
-    console.log('Region Selected: ', regionSelect)
     prefectureSelect = $('#prefecture_scope').val()
-    console.log('Pefecture Selected: ', prefectureSelect)
-
-
     guineaAdminLayer0 = L.geoJson(layers['guineaAdmin0'], {
         style: layerStyles['admin0']
     }).addTo(map)
 
     guineaAdminLayer2 = L.geoJson(layers['guineaAdmin2'], {
-        style: layerStyles['admin0'],
+        style: layerStyles['region'],
         onEachFeature: function (feature, layer) {
             var labelIcon = L.divIcon({
                 className: 'labelLga-icon',
@@ -269,9 +257,8 @@ function addAdminLayersToMap(layers) {
       region_layer = L.geoJson(layers['guineaAdmin1'], {
         filter: function(feature) {
           return feature.properties.NAME_1 === regionSelect
-          console.log('name 1: ', feature.properties.NAME_1)
       },
-      style: layerStyles['admin0'],
+      style: layerStyles['region'],
       }).addTo(map)
     map.fitBounds(region_layer.getBounds())
 
@@ -283,9 +270,8 @@ function addAdminLayersToMap(layers) {
       prefecture_layer = L.geoJson(layers['guineaAdmin2'], {
         filter: function(feature) {
           return feature.properties.NAME_2 === prefectureSelect
-          console.log('name 2: ', feature.properties.NAME_2)
       },
-      style: layerStyles['admin0'],
+      style: layerStyles['region'],
       }).addTo(map)
     map.fitBounds(prefecture_layer.getBounds())
 
@@ -294,9 +280,7 @@ function addAdminLayersToMap(layers) {
 
 
 function displayInfo(feature) {
-    //console.log('displaying info..')
     var infoContent = buildPopupContent(feature)
-        //console.log("info", infoContent)
     $('#infoContent').html(infoContent)
 }
 
@@ -374,7 +358,7 @@ function logError(error) {
 }
 
 
-function geoLocate(){
+function geoLocate(km){
 var options = {
   enableHighAccuracy: true,
   timeout: Infinity,
@@ -387,9 +371,6 @@ function success(pos) {
     current_long = crd.longitude;
     current_accuracy = crd.accuracy;
 
-    console.log('Lat:  ', current_lat);
-    console.log('Long:  ', current_long);
-
     var fc = {
 "type": "FeatureCollection",
 "features": [
@@ -401,12 +382,16 @@ function success(pos) {
         lalo = L.GeoJSON.coordsToLatLng(coord);
         map.setView(lalo, 14);
 
-    var drive = distance * 1;
-    console.log('Drive dist:: ', drive);
-    console.log('the fc:  ', fc)
-
+    var drive = km * 1;
     var buffered = turf.buffer(fc, drive, 'kilometers');
-    var bufferLayer = L.geoJson(buffered).addTo(map);
+    bufferLayer = L.geoJson(buffered).addTo(map);
+    bufferLayer.setStyle({
+        stroke:false,
+        strokeWidth: 2,
+        fillColor: 'blue',
+        fillOpacity: 0.09
+    })
+
 };
 
 function error(err) {
@@ -418,38 +403,9 @@ function error(err) {
 
 
 function createBuffer() {
-//    var drive = distance * 1;
-//
-//    var pts = {
-//        "type": "FeatureCollection",
-//        "features": [
-//            { "type": "Feature", "properties": { "id": 5 }, "geometry": { "type": "Point", "coordinates": [current_long, current_lat] } }
-//            ]
-//        }
-//    console.log('Drive dist:: ', drive);
-//    console.log('the fc:  ', pts)
-//
-//    var buffered = turf.buffer(pts, drive, 'kilometers');
-//    var bufferLayer = L.geoJson(buffered).addTo(map);
+
 }
 
-//Making Sure Multiple CheckBox are not selected at a time
-$("input:checkbox").on('click', function() {
-  // in the handler, 'this' refers to the box clicked on
-  var $box = $(this);
-  if ($box.is(":checked")) {
-    // the name of the box is retrieved using the .attr() method
-    // as it is assumed and expected to be immutable
-      distance = $box.attr("value");
-    var group = "input:checkbox[name='" + $box.attr("name") + "']";
-    // the checked state of the group/box on the other hand will change
-    // and the current value is retrieved using .prop() method
-    $(group).prop("checked", false);
-    $box.prop("checked", true);
-  } else {
-    $box.prop("checked", false);
-  }
-});
 
 //Filtering Prefecture Based on Selected Region
 $(document).ready(function () {
@@ -465,6 +421,30 @@ $(document).ready(function () {
 });
 
 
+function radio_drive() {
+    if(document.getElementById("2km").checked) {
+        if(bufferLayer != null)
+            map.removeLayer(bufferLayer)
+        twokm = $('#2km').val();
+        geoLocate(twokm);
+		}
+
+    if(document.getElementById("3km").checked) {
+        if(bufferLayer != null)
+            map.removeLayer(bufferLayer)
+        threekm = $('#3km').val();
+        geoLocate(threekm);
+		}
+
+    if(document.getElementById("4km").checked) {
+        if(bufferLayer != null)
+            map.removeLayer(bufferLayer)
+        fourkm = $('#4km').val();
+        geoLocate(fourkm);
+		}
+}
+
+
 function showPrefecture() {
     prefecture_show = document.getElementById("prefecture_id");
     prefecture_show1 = document.getElementById("prefecture_id1");
@@ -475,7 +455,7 @@ function showPrefecture() {
 
     else{
         prefecture_show.style.visibility = "hidden"
-         prefecture_show1.style.visibility = "hidden"
+        prefecture_show1.style.visibility = "hidden"
     }
 
 }

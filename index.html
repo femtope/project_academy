@@ -26,7 +26,6 @@
     <link rel="stylesheet" href="plugins/MarkerCluster/MarkerCluster.Default.css">
      <!-- JQuery Slider -->
     <link rel="stylesheet" href="css/icon.css">
-
 </head>
 
 
@@ -43,7 +42,7 @@
           <img src="image/logo2.png" height="70" width="300">
         </div>
           <div class="title">
-                <h1>Guinea Health Facility Locator</h1>
+                <h1>Guinea Health Facility(ies)</h1>
         </div>
       </div>
     </nav>
@@ -149,11 +148,11 @@
                  <!--Distance-->
                 <br>
                  <h4><i class="icon fa fa-car fa-2x"></i>Drive Distance</h4>
-                      <div class="form-group special-size">
-                         <form class="checkbox" onclick="geoLocate(); createBuffer();">
-                            <input type="checkbox" name="drive" value="2">2 Km<br>
-                            <input type="checkbox" name="drive" value="3">3 Km<br>
-                            <input type="checkbox" name="drive" value="4">4 Km<br>
+                 <div class="form-group special-size">
+                         <form class="radio">
+                            <input id="2km" type="radio" name="drive" value="2" onclick="radio_drive();">2 Km<br>
+                            <input id="3km" type="radio" name="drive" value="3" onclick="radio_drive();">3 Km<br>
+                            <input id="4km" type="radio" name="drive" value="4" onclick="radio_drive();">4 Km<br>
                           </form>
                     </div>
                  <br>
@@ -206,23 +205,6 @@
         </div>
             </section>
         </div>
-
-        <footer>
-<!--
-        <div class="col-md-12  border">
-            <ul class="social-network social-circle">
-                <p class="pull-right">&copy; 2016 &middot; <a href="#">Oluwafemi Ooju</a> and&middot; <a href="#">Jalla Osman</a> eHA Academy Projects</p>
-                <li><a target="_blank" href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-                <li><a target="_blank" href="https://www.facebook.com/BrianAlex1251" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                <li><a target="_blank" href="http://www.twitter.com/femtope" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                <li><a target="_blank" href="https://plus.google.com/u/0/115849015961200482106" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                <li><a target="_blank" href="https://www.linkedin.com/in/oluwafemi-ooju-0061b627" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-        </div>
--->
-
-      </footer>
-        <!-- jQuery 2.1.4 -->
         <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?v=3&amp;sensor=false"></script>
         <script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/tags/markerwithlabel/1.1.8/src/markerwithlabel.js"></script>
         <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
