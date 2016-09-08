@@ -23,7 +23,7 @@ var map = L.map('map', {
     zoom: 7,
     animation: true,
     zoomControl: false,
-    layers: [osm]
+    layers: [mapbox]
     //minZoom: 6
 
 });
