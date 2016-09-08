@@ -25,3 +25,7 @@ The total number of health facility(ies) based on the multi-criteria selection i
 #System requirements
 -	Any web browser.
 -	An Internet connexion.
+
+
+
+![image](https://cloud.githubusercontent.com/assets/8319389/18350305/2ac899de-75cd-11e6-85a9-7c10411ca49b.png)
