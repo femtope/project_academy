@@ -28,4 +28,4 @@ The total number of health facility(ies) based on the multi-criteria selection i
 
 
 
-![image](https://cloud.githubusercontent.com/assets/8319389/18350305/2ac899de-75cd-11e6-85a9-7c10411ca49b.png)
+![image](https://cloud.githubusercontent.com/assets/8319389/18391895/8cf8222a-76a7-11e6-97d5-a1b0df68fc01.png)
