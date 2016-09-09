@@ -1,5 +1,5 @@
 #map {
-    height: 700px;
+    height: 650px;
 }
 
 .skin-red-light .wrapper,
@@ -12,7 +12,7 @@
 
 .main-sidebar,
 .left-side {
-    width: 350px;
+    width: 250px;
 }
 
 .sidebar-collapse .main-sidebar,
@@ -104,16 +104,18 @@
 
 }
 .logo_pad{
-    padding-top: 1px;
-    padding-right: 2px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    padding-right: 50px;
 }
 
 .title{
     font: bold 20px "Bungee Shade";
 /*    font-family: 'Bungee Shade';*/
     color: white;
-    text-align: center;
-/*    font-family: 'Baloo Bhaina', cursive;*/
+    text-align: left;
+    padding-left: 20px;
 
 }
 
@@ -129,7 +131,7 @@
 #detailPosition{
     position: absolute;
     top: 160px;
-    right: 5px;
+    right: 0px;
     width: 250px;
     height: 100px;
     background: transparent;
@@ -143,7 +145,7 @@ input.checkbox  {
 	}
 
 .special-size{
-    font: 22px "Agency FB";
+    font: 18px "Agency FB";
 /*    font: 20px "Baloo Bhaina";*/
 /*    color: white;*/
     text-align: justify;

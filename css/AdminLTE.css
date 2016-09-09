@@ -16,7 +16,7 @@ body {
 }
 .layout-boxed html,
 .layout-boxed body {
-  height: 600px;
+  height: 700px;
 }
 body {
   -webkit-font-smoothing: antialiased;

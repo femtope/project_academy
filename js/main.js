@@ -10,6 +10,7 @@ var type = '', distance,
     guineaAdminLayer0, guineaAdminLayer1, guineaAdminLayer2,
     region_layer = null, prefecture_layer = null, sub_prefecture_layer = null, bufferLayer = null,
     GINLabels = [],
+    within, within_fc, buffered = null,
     GINAdmin2 = false,
     googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']}),
     googleStreets = L.tileLayer('http://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']}),
@@ -19,7 +20,7 @@ var type = '', distance,
 
 
 var map = L.map('map', {
-    center: [10.1, -12.6],
+    center: [9.4, -12.6],
     zoom: 7,
     animation: true,
     zoomControl: false,
@@ -50,9 +51,9 @@ new L.Control.Zoom({
 
 L.control.layers(baseMaps).addTo(map);
 
-new L.Control.Zoom({
-    position: 'topright'
-}).addTo(map);
+//new L.Control.Zoom({
+//    position: 'topright'
+//}).addTo(map);
 
 L.control.scale({
     position: 'bottomright',
@@ -191,7 +192,7 @@ function addAdminLayersToMap(layers) {
             'admin0': {
                 "clickable": true,
                 "color": '#B81609',
-                "fillColor": '#FFFFFF',
+                "fillColor": '#ffffff',
                 "weight": 2.0,
                 "opacity": 1.5,
                 "fillOpacity": 0.1
@@ -199,7 +200,7 @@ function addAdminLayersToMap(layers) {
             'admin2': {
                 "clickable": true,
                 "color": '#412406',
-                "fillColor": '#FFFFFF',
+                "fillColor": '#80FFFFFF',
                 "weight": 1.5,
                 "opacity": 0.5,
                 "fillOpacity": 0.1
@@ -207,7 +208,7 @@ function addAdminLayersToMap(layers) {
             'region': {
                 "clickable": true,
                 "color": '#e2095c',
-                "fillColor": '#FFFFFF',
+                "fillColor": '#80FFFFFF',
                 "weight": 2.0,
                 "opacity": 0.7,
                 "fillOpacity": 0.1
@@ -215,7 +216,7 @@ function addAdminLayersToMap(layers) {
             'prefecture': {
                 "clickable": true,
                 "color": '#e2095c',
-                "fillColor": '#FFFFFF',
+                "fillColor": '#80FFFFFF',
                 "weight": 2.5,
                 "opacity": 0.7,
                 "fillOpacity": 0.1
@@ -223,7 +224,7 @@ function addAdminLayersToMap(layers) {
             'sub_prefecture': {
                 "clickable": true,
                 "color": '#ff0000',
-                "fillColor": '#FFFFFF',
+                "fillColor": '#80FFFFFF',
                 "weight": 2.5,
                 "opacity": 0.7,
                 "fillOpacity": 0.1
@@ -318,6 +319,7 @@ function getData(queryUrl) {
     $.post(queryUrl, function (data) {
         hideLoader()
         addDataToMap(data)
+        console.log('Data-Geo::  ', data);
     }).fail(function () {
         console.log("error!")
     });
@@ -383,8 +385,12 @@ function success(pos) {
         map.setView(lalo, 14);
 
     var drive = km * 1;
-    var buffered = turf.buffer(fc, drive, 'kilometers');
+    buffered = turf.buffer(fc, drive, 'kilometers');
+//    console.log('Buffered::  ', buffered);
+//    within = turf.within(geoData, buffered);
+
     bufferLayer = L.geoJson(buffered).addTo(map);
+//    within_fc = L.geoJson(within).addTo(map);
     bufferLayer.setStyle({
         stroke:false,
         strokeWidth: 2,
@@ -402,9 +408,6 @@ function error(err) {
 }
 
 
-function createBuffer() {
-
-}
 
 
 //Filtering Prefecture Based on Selected Region
@@ -419,6 +422,7 @@ $(document).ready(function () {
         });
     });
 });
+
 
 
 function radio_drive() {
