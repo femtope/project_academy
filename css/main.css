@@ -36,11 +36,11 @@
 .alert-info,
 .label-info,
 .modal-info .modal-body {
-    background-color: rgba(0, 0, 0, 1) !important;
+    background-color: rgba(18, 18, 18, 1) !important;*/
 }
 
 .alert-info {
-    border-color: rgba(0, 0, 0, 1);
+    border-color: rgba(18, 18, 18, 1);
 }
 
 .labelLga-icon {
@@ -104,10 +104,10 @@
 
 }
 .logo_pad{
-    padding-top: 10px;
-    padding-left: 10px;
-    padding-bottom: 10px;
-    padding-right: 50px;
+    position: absolute;
+    top: 10px;
+    padding-left: 85px;
+
 }
 
 .title{
@@ -145,7 +145,7 @@ input.checkbox  {
 	}
 
 .special-size{
-    font: 18px "Agency FB";
+    font: 15px "Source Sans Pro";
 /*    font: 20px "Baloo Bhaina";*/
 /*    color: white;*/
     text-align: justify;

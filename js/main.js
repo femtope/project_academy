@@ -394,8 +394,8 @@ function success(pos) {
     bufferLayer.setStyle({
         stroke:false,
         strokeWidth: 2,
-        fillColor: 'blue',
-        fillOpacity: 0.09
+        fillColor: 'red',
+        fillOpacity: 0.1
     })
 
 };

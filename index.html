@@ -9,7 +9,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="https://fonts.googleapis.com/css?family=Baloo+Bhaina|Bungee+Shade" rel="stylesheet">
     <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -35,8 +35,8 @@
     <div class="wrapper">
         <aside class="main-sidebar main-sidebar-light sidebar_edit">
             <section class="sidebar">
-            <div class="title">
-                <h1>Guinea Health Facility(ies)</h1>
+            <div class="text-center">
+                <h1>Guinea Health Facilities</h1>
             </div>
 
             <div class="alert"></div>
@@ -45,7 +45,7 @@
                     <span class="info-box-number white"><b id="country2"></b><big id="projectCount">0</big> Health Facility(ies)  </span>
             </div>
              <div class="alert alert-info sideColor">
-                <h4><i class="icon fa fa-h-square fa-2x"></i>Health Facility Type </h4>
+                <h4 class="info-box-number white"><i class="icon fa fa-h-square fa-1x"></i>Health Facility Type </h4>
                       <div class="form-group-sm">
                         <select id="hf_type" onchange="triggerUiUpdate(); getAdminLayers()" class="form-control">
                             <option value="">All</option>
@@ -72,7 +72,7 @@
 
                  <!--Region DropDown-->
                  <br>
-                 <h4><i class="icon fa fa-globe fa-2x"></i>Region</h4>
+                 <h4><i class="icon fa fa-globe fa-1x"></i>Region</h4>
                       <div class="form-group-sm">
                         <select id="region_scope" onchange="getAdminLayers(); triggerUiUpdate(); showPrefecture();" class="form-control">
                             <option value="">All</option>
@@ -89,7 +89,7 @@
 
                  <!--Prefecture DropDown-->
                  <br>
-                 <h4 id="prefecture_id" readonly style="visibility:hidden"><i class="icon fa fa-globe fa-2x"></i>Prefecture</h4>
+                 <h4 id="prefecture_id" readonly style="visibility:hidden"><i class="icon fa fa-globe fa-1x"></i>Prefecture</h4>
                       <div id="prefecture_id1" class="form-group-sm" readonly style="visibility:hidden">
                         <select id="prefecture_scope" onchange="getAdminLayers(); triggerUiUpdate();" class="form-control">
                             <option value="">All</option>
@@ -140,7 +140,7 @@
 
                  <!--Distance-->
                 <br>
-                 <h4><i class="icon fa fa-car fa-2x"></i>Drive Distance</h4>
+                 <h4><i class="icon fa fa-car fa-1x"></i>Drive Distance</h4>
                  <div class="form-group special-size">
                          <form class="radio">
                             <input id="2km" type="radio" name="drive" value="2" onclick="radio_drive();">2 Km<br>
@@ -151,6 +151,9 @@
                  <br>
             </div>
           </section>
+            <div class="logo_pad">
+                    <a target="_blank" href="http://www.aho.afro.who.int/profiles_information/index.php/Guinea:The_Health_System"><img  src="image/logo2.png" height="70" width="300"></a>
+            </div>
 
         </aside>
         <section>
@@ -161,6 +164,7 @@
                 <div>
                   <h7 class="red text-center"><i class="icon fa fa-spinner fa-5x" id="spinposition"></i></h7>
                 </div>
+
 
             <div id="detailPosition">
               <div class="alert sideColor">
@@ -180,9 +184,9 @@
 
         <div class="col-md-12  border">
             <ul class="social-network social-circle">
-                <li><a target="_blank" href="http://www.aho.afro.who.int/profiles_information/index.php/Guinea:The_Health_System"><img class="logo_pad" src="image/logo2.png" height="60" width="300"></a></li>
+<!--                <li><a target="_blank" href="http://www.aho.afro.who.int/profiles_information/index.php/Guinea:The_Health_System"><img class="logo_pad" src="image/logo2.png" height="60" width="300"></a></li>-->
                 <li></li><li></li><li></li>
-                <li><a target="_blank" href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
+<!--                <li><a target="_blank" href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>-->
                 <li><a target="_blank" href="https://www.facebook.com/BrianAlex1251" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                 <li><a target="_blank" href="http://www.twitter.com/femtope" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
                 <li><a target="_blank" href="https://plus.google.com/u/0/115849015961200482106" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>

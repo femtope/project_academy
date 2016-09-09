@@ -82,7 +82,7 @@ a.socialIcon:hover, .socialHoverClass {
 	transition: all 0.8s;
 }
 .border {
-    background-color: black;
+    background-color: '#121212';
     text-align: right;
 }
 
