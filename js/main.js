@@ -20,7 +20,7 @@ var type = '', distance,
 
 
 var map = L.map('map', {
-    center: [9.4, -12.6],
+    center: [9.6, -12.6],
     zoom: 7,
     animation: true,
     zoomControl: false,

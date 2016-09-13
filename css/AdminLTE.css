@@ -12,7 +12,7 @@
  */
 html,
 body {
-  min-height: 700px;
+  min-height: 600px;
 }
 .layout-boxed html,
 .layout-boxed body {
